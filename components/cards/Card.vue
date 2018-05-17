@@ -1,15 +1,26 @@
 <template>
     <b-card class="swap-card"> 
-        <div class="card-text card-bodt">
-            {{ contact }}
+        <div class="card-text">
+            {{contact.name}}
         </div>
     </b-card>
-    
+     
+ 
 </template>
 
 <script>
 export default {
-    props: ['contact']
+    props: {
+        contact: {
+            type: Object,
+            required: true
+        },
+        asLink: {
+            type: Boolean,
+            default: false
+        }
+    }
+
 }
 </script>
 
@@ -18,7 +29,7 @@ export default {
     transition: 0.8s;
     height: 12.5rem;
     max-height: 15rem;
-    margin: 0 auto;
+    margin: 1rem;
     font-size: 80%;
 }
 .card-body{

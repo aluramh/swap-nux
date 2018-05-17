@@ -1,14 +1,18 @@
+const api = "http://35.192.139.25:3000/"
+import axios from 'axios'
 export const state = () => ({
-    loadedContacts: ['Orlando', 'Amelia']
+    loadedContacts: [
+        {
+            id: '1',
+            name: 'Orlando Bustamante'
+        }
+    ]
 })
+
+
+export const getters = {
+    getContactById: state => id => {
+        return state.loadedContacts.find(contact => contact.id === id)
+    }
+}
     
-
-// export const getters = {
-//     contactsCount: state => {
-//         return state.loadedContacts.length
-//     }
-// }
-
-// export const mutations = {}
-// export const actions = {}
-
