@@ -3,7 +3,7 @@
     <Header/>
     <b-container fluid>
         <b-row>
-          <b-col cols="2"></b-col>
+          <Sidebar/>
           <b-col>
             <b-container class="main-container">
               <nuxt/>
@@ -17,12 +17,14 @@
 
 
 <script>
-import Header from '@/components/Header.vue'
-import Footer from '@/components/Footer.vue'
+import Header from '@/components/TheHeader'
+import Footer from '@/components/TheFooter'
+import Sidebar from '@/components/TheSidebar'
 export default {
   components: {
     Header,
-    Footer
+    Footer,
+    Sidebar
   }
 }
 </script>
