@@ -1,29 +1,64 @@
 <template>
-  <b-row>
-    <b-col cols md="4" sm="6" xs="12" v-for="contact in contacts" :key="contact.email">
-      <Card :contact="contact"/>
-    </b-col>
-  </b-row>
+  <div>
+    <b-row align-h="end"> 
+      <b-col cols="4" >
+        <no-ssr>
+
+          <SearchContact :searchAction="searchContacts" />
+        </no-ssr>
+     
+      </b-col>
+    </b-row>
+    <CardsGrid :contacts="contactsToDisplay" />
+    <b-row class="pt-3" align-h="center">
+        <b-pagination 
+          :total-rows="totalCount" 
+          :value="currentPage" 
+          :per-page="perPage"
+          @input="changePage" 
+          hide-ellipsis
+          />
+     
+    </b-row>
+  </div>
 </template>
 
 
 <script>
-import Card from '@/components/cards/Card.vue'
+import CardsGrid from '@/components/cards/CardsGrid'
+import SearchContact from '@/components/Contacts/SearchContact'
 import axios from 'axios'
 export default {
-  
-  asyncData(context){
-    return axios.get('http://35.192.139.25:3000/contacts')
-    .then((response) => {
-      console.log('contacts fetched!')
-      return {
-        contacts: response.data.splice(0,12)
-      }
-    })
-    .catch((err) => new Error(err))
-  },
   components: {
-    Card
+    CardsGrid,
+    SearchContact
+  },
+  methods: {
+    selectContact(id) {
+      alert('Selected contact with id ' + id)
+    },
+    searchContacts(term) {
+      return this.$store.dispatch('searchContacts', term)
+    },
+    changePage(newPage) {
+      this.$store.dispatch('changePage', newPage)
+    }
+      
+  },
+  computed: {
+    contactsToDisplay() {
+      return this.$store.state.loadedContacts
+    },
+    totalCount() {
+      return this.$store.getters.totalContacts
+    },
+    perPage() {
+      return this.$store.state.perPage
+    },
+    currentPage() {
+      return this.$store.state.page
+    }
   }
+  
 }
 </script>
