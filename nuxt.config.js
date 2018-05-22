@@ -38,7 +38,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/vue-search-select.js', ssr: false}
+    { src: '~/plugins/vue-search-select.js', ssr: false},
+    '~plugins/directives.js'
   ],
 
   /*
@@ -55,7 +56,7 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    baseURL: 'http://localhost:3000'
+    baseURL: 'http://localhost:3000/api'
   },
 
   /*

@@ -27,7 +27,7 @@ const createStore = () => {
         },
         actions:{
             nuxtServerInit(vuexContext, context) {
-                return context.app.$axios.$get('/api/contacts')
+                return context.app.$axios.$get('/contacts')
                 .then(data => {
                     vuexContext.commit('setAllContacts', data.contacts)
                     vuexContext.commit('loadContacts', data.contacts)   

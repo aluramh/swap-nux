@@ -3,10 +3,8 @@
     <b-row align-h="end"> 
       <b-col cols="6" >
         <no-ssr>
-
           <SearchContact/>
         </no-ssr>
-     
       </b-col>
     </b-row>
     <CardsGrid :contacts="contactsToDisplay" />
@@ -18,7 +16,6 @@
           @input="changePage" 
           hide-ellipsis
           />
-     
     </b-row>
   </div>
 </template>
@@ -31,6 +28,9 @@ export default {
   components: {
     CardsGrid,
     SearchContact
+  },
+  created() {
+    this.$store.dispatch('loadAllContacts')
   },
   methods: {
     changePage(newPage) {

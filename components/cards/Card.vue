@@ -5,7 +5,7 @@
             class="swap-card"
             header-class="swap-header"> 
             <slot slot="header">
-                <div :style="{backgroundColor: contactColor['normal']}"></div>
+                <div v-swap-color="contactType"></div>
             </slot>
             <div class="card-text">
                 <ul>
@@ -31,9 +31,7 @@ export default {
     },
     data() {
         return {
-            contactColor: {
-                'normal': 'purple'
-            }
+            contactType: 1
         }
     }
 
@@ -44,13 +42,12 @@ export default {
 .swap-card{
     transition: 0.8s;
     height: 12rem;
-    max-height: 364px;
     width: 300px;
-    margin: 1rem;
+    margin: 0 auto;
     font-size: 80%;
 }
 .card-body{
-    max-height: 12rem;
+    display: inherit;
     background: linear-gradient(to bottom,rgba(222, 222, 222, 0),rgba(222, 222, 222, 1));
 }
 

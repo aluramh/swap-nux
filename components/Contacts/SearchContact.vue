@@ -1,15 +1,17 @@
 <template>
-      
-    <v-search
-        :list="list"
-        option-text="name"
-        option-value="id"
-        :custom-text="customText"
-        placeholder="Search contact by name, position or company"
-        @select="selectContact"
-        :selected-item="selectedContact"
-        @searchchange="searchContacts"
-    />
+    <div>
+
+        <v-search
+            :list="list"
+            option-text="name"
+            option-value="id"
+            :custom-text="customText"
+            placeholder="Search contact by name, position or company"
+            @select="selectContact"
+            :selected-item="selectedContact"
+            @searchchange="searchContacts"
+        />
+    </div>
     
 
 </template>
