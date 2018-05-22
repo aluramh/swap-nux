@@ -20,13 +20,19 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#FFFFFF' },
+  loading: { color: '#26c9cf', height: '5px', duration: 5000 },
 
   /*
   ** Global CSS
   */
   css: [
+    '~assets/styles/transition.css'
   ],
+
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
+  },
 
   /*
   ** Plugins to load before mounting the App

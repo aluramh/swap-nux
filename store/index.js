@@ -9,55 +9,57 @@ const createStore = () => {
             perPage: 12
         },
         mutations:{
-            setContacts(state, contacts) {
+            setAllContacts(state, contacts) {
                 state.allContacts = contacts
             },
-            loadFromPagination(state) {
-                let from = state.page * state.perPage - state.perPage
-                let to   = state.perPage
-                state.loadedContacts = state.allContacts.slice().splice(from,to)
+            loadContacts(state, contacts) {
+                state.loadedContacts = contacts
             },
-            loadFromSearch(state, foundContacts) {
-                state.loadedContacts = foundContacts
+            loadOneById(state, contact) {
+                state.loadedContacts = [contact]
             },
-            changePage(state, newPage) {
-                state.page = newPage
+            changePage(state, page) {
+                state.page = page
+            },
+            loadAllContacts(state) {
+                state.loadedContacts = state.allContacts
             }
         },
         actions:{
             nuxtServerInit(vuexContext, context) {
                 return context.app.$axios.$get('/api/contacts')
                 .then(data => {
-                    vuexContext.commit('setContacts', data.contacts)
+                    vuexContext.commit('setAllContacts', data.contacts)
+                    vuexContext.commit('loadContacts', data.contacts)   
                 })
                 .catch(e => new Error(e))      
             },
             searchContacts(vuexContext, term) {
-                if (term.length < 3) {
-                    vuexContext.commit('loadFromPagination')
-                    return
-                }
                 term = term.toLowerCase()
-                let foundContacts = vuexContext.state.allContacts.filter( contact => {
-                        
-                    return (
-                        contact.name.toLowerCase().includes(term) || 
-                        contact.position.toLowerCase().includes(term) ||
-                        contact.company.toLowerCase().includes(term)
-                    )
+                let found = vuexContext.state.allContacts.filter( contact => {
+                    return contact.name.toLowerCase().includes(term) || 
+                    contact.position.toLowerCase().includes(term) ||
+                    contact.company.toLowerCase().includes(term)
                 })
 
-                vuexContext.commit('loadFromSearch', foundContacts) 
+                vuexContext.commit('loadContacts', found)
+
             },
-            changePage(vuexContext, context) {
-                vuexContext.commit('changePage', context)
-                vuexContext.commit('loadFromPagination')
+            changePage(vuexContext, page) {
+                vuexContext.commit('changePage', page)
+            },
+            loadOneById(vuexContext, id) {
+                let contact = vuexContext.state.allContacts.find( c => c.id === id)
+                vuexContext.commit('loadOneById', contact)
+            },
+            loadAllContacts(vuexContext) {
+                vuexContext.commit('loadAllContacts')
             }
 
         },
         getters: {
             totalContacts: state => {
-                return state.allContacts.length
+                return state.loadedContacts.length
             },
             contactById: state => id => {
                 return state.allContacts.find( contact => contact.id === id )

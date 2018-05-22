@@ -1,8 +1,8 @@
 <template>
     <b-row class="justify-content-center"> 
-        
-        <Card :contact="contact" />
-        
+        <b-col>
+            <h1>{{contact.name}}</h1>
+        </b-col>
     </b-row>
 </template>
 
@@ -12,13 +12,20 @@ export default {
   components: {
     Card
   },
+  validate({params, store}) {
+    return (
+        /^\d+$/.test(params.id) &&
+        store.state.allContacts.some(contact => contact.id === params.id)     
+    )
+  },
   data() {
       return {
           contact: Object
       }
   },
   created() {
-      this.contact = this.$store.getters.contactById(this.$route.params.id)
+     let contact = this.$store.getters.contactById(this.$route.params.id)
+     this.contact = contact
   }
 }
 </script>

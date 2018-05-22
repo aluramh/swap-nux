@@ -1,14 +1,16 @@
 <template>
-       <div>
-           <v-search
-            :list="list"
-            option-value="id"
-            :custom-text="nameAndPosition"
-            v-model="selectedContact"
-            placeholder="Search contact by name"
-            @searchchange="searchAction"
-           />
-       </div>
+      
+    <v-search
+        :list="list"
+        option-text="name"
+        option-value="id"
+        :custom-text="customText"
+        placeholder="Search contact by name, position or company"
+        @select="selectContact"
+        :selected-item="selectedContact"
+        @searchchange="searchContacts"
+    />
+    
 
 </template>
 
@@ -20,22 +22,29 @@ export default {
             selectedContact: {},
         }
     },
-    props: {
-        searchAction: Function
-    },
     methods: {
-        nameAndPosition(item) {
-            return `${item.name} - ${item.position}`
+        customText(item) {
+            return `${item.name} - ${item.position} (${item.company})`
+        },
+        searchContacts(term) {
+            if (term.length === 0) { return }
+            this.$store.dispatch('searchContacts', term)
+            
+        },
+        selectContact(item) {
+            if(item.id) {
+                this.selectedContact = item
+                this.$store.dispatch('loadOneById', item.id)
+            } else {
+               
+                this.$store.dispatch('loadAllContacts')
+            
+            }
         }
     },
     computed: {
         list() {
             return this.$store.state.loadedContacts
-        }
-    },
-    watch: {
-        selectedContact(contact) {
-            this.$router.push('/contacts/' + contact.id)
         }
     }
 }

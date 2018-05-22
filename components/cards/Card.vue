@@ -1,24 +1,24 @@
 <template>
-    <b-card 
-        class="swap-card"
-        header-class="swap-header"
-        > 
-        <slot slot="header">
-           <div :style="{backgroundColor: contactColor['normal']}"></div>
-        </slot>
-        <div class="card-text">
-            <ul>
-                <li>{{ contact.name }}</li>
-                <li>{{ contact.company }}</li>
-                <li>{{ contact.position }}</li>
-                <li>123-456-7890</li>
-                <li>mail@company.com</li>
-            </ul>
-            
-        </div>
-    </b-card>
-     
- 
+    <nuxt-link :to="'/contacts/' + contact.id">
+
+        <b-card 
+            class="swap-card"
+            header-class="swap-header"> 
+            <slot slot="header">
+                <div :style="{backgroundColor: contactColor['normal']}"></div>
+            </slot>
+            <div class="card-text">
+                <ul>
+                    <li>{{ contact.name }}</li>
+                    <li>{{ contact.company }}</li>
+                    <li>{{ contact.position }}</li>
+                    <li>123-456-7890</li>
+                    <li>mail@company.com</li>
+                </ul>
+            </div>
+        </b-card>
+    </nuxt-link>
+
 </template>
 
 <script>
@@ -71,6 +71,11 @@ ul {
     position: absolute;
     right: 0;
     top: 0;
+}
+
+a, a:link, a:active{
+    text-decoration: none;
+    color: inherit;
 }
 </style>
 

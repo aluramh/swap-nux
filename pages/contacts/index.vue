@@ -1,10 +1,10 @@
 <template>
   <div>
     <b-row align-h="end"> 
-      <b-col cols="4" >
+      <b-col cols="6" >
         <no-ssr>
 
-          <SearchContact :searchAction="searchContacts" />
+          <SearchContact/>
         </no-ssr>
      
       </b-col>
@@ -27,19 +27,12 @@
 <script>
 import CardsGrid from '@/components/cards/CardsGrid'
 import SearchContact from '@/components/Contacts/SearchContact'
-import axios from 'axios'
 export default {
   components: {
     CardsGrid,
     SearchContact
   },
   methods: {
-    selectContact(id) {
-      alert('Selected contact with id ' + id)
-    },
-    searchContacts(term) {
-      return this.$store.dispatch('searchContacts', term)
-    },
     changePage(newPage) {
       this.$store.dispatch('changePage', newPage)
     }
@@ -47,7 +40,9 @@ export default {
   },
   computed: {
     contactsToDisplay() {
-      return this.$store.state.loadedContacts
+      let from = this.perPage * this.currentPage - this.perPage
+      let to   = this.perPage
+      return this.$store.state.loadedContacts.slice().splice(from, to)
     },
     totalCount() {
       return this.$store.getters.totalContacts

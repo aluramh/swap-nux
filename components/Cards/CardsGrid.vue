@@ -1,18 +1,16 @@
 <template>
-    <b-row>
-      <b-col 
-       v-if="contacts.length > 0"
-       cols 
-       md="4" 
-       sm="6" 
-       xs="12" 
-       v-for="contact in contacts" :key="contact._id">
-        <Card :contact="contact"/>
-      </b-col>
-      <b-col v-else>
-            <h3>No contacts found</h3>
-        </b-col>
-    </b-row>
+        <transition-group
+            tag="div" 
+            class="row"
+            name="list-complete"
+            v-if="contacts.length > 0">
+                <div
+                    v-for="contact in contacts" :key="contact.id"
+                    class="col-md-4 col-sm-6 col-xs-12 list-complete-item"
+                >
+                    <Card :contact="contact"/>
+                </div>
+        </transition-group>
 </template>
 
 
@@ -30,3 +28,17 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.list-complete-item {
+  transition: all 1.5s;
+}
+.list-complete-enter, .list-complete-leave-to
+/* .list-complete-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.list-complete-leave-active {
+  position: absolute;
+}
+</style>
