@@ -23,7 +23,7 @@
 
 
 <script>
-import CardsGrid from '@/components/cards/CardsGrid'
+import CardsGrid from '@/components/Cards/CardsGrid'
 import SearchContact from '@/components/Contacts/SearchContact'
 export default {
   components: {
