@@ -6,7 +6,10 @@ const createStore = () => {
             allContacts: [],
             loadedContacts: [],
             page: 1,
-            perPage: 12
+            perPage: 12,
+            filters: {
+                category: []
+            }
         },
         mutations:{
             setAllContacts(state, contacts) {
@@ -23,37 +26,43 @@ const createStore = () => {
             },
             loadAllContacts(state) {
                 state.loadedContacts = state.allContacts
+            },
+            setFilter(state, {filter, value} ) {
+                state.filters[filter] = value
             }
         },
         actions:{
-            nuxtServerInit(vuexContext, context) {
-                return context.app.$axios.$get('/contacts')
+            nuxtServerInit({commit}, {app}) {
+                return app.$axios.$get('/contacts')
                 .then(data => {
-                    vuexContext.commit('setAllContacts', data.contacts)
-                    vuexContext.commit('loadContacts', data.contacts)   
+                    commit('setAllContacts', data.contacts)
+                    commit('loadContacts', data.contacts)   
                 })
                 .catch(e => new Error(e))      
             },
-            searchContacts(vuexContext, term) {
+            searchContacts({commit, state}, term) {
                 term = term.toLowerCase()
-                let found = vuexContext.state.allContacts.filter( contact => {
+                let found = state.allContacts.filter( contact => {
                     return contact.name.toLowerCase().includes(term) || 
                     contact.position.toLowerCase().includes(term) ||
                     contact.company.toLowerCase().includes(term)
                 })
 
-                vuexContext.commit('loadContacts', found)
+                commit('loadContacts', found)
 
             },
-            changePage(vuexContext, page) {
-                vuexContext.commit('changePage', page)
+            changePage({commit}, page) {
+                commit('changePage', page)
             },
-            loadOneById(vuexContext, id) {
-                let contact = vuexContext.state.allContacts.find( c => c.id === id)
-                vuexContext.commit('loadOneById', contact)
+            loadOneById({commit,state}, id) {
+                let contact = state.allContacts.find( c => c.id === id)
+                commit('loadOneById', contact)
             },
-            loadAllContacts(vuexContext) {
-                vuexContext.commit('loadAllContacts')
+            loadAllContacts({commit}) {
+                commit('loadAllContacts')
+            },
+            setFilter( {commit}, {filter,value}) {
+                commit('setFilter', {filter,value})
             }
 
         },
