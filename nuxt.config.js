@@ -56,7 +56,8 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    baseURL: 'http://localhost:3000/api'
+    baseURL: 'http://localhost:3000/api',
+    browserBaseURL: 'http://35.192.139.25:3000/api'
   },
 
   /*
