@@ -8,8 +8,9 @@
       </b-col>
     </b-row>
     <CardsGrid :contacts="contactsToDisplay" />
-    <b-row class="pt-3" align-h="center">
+    <b-row  v-if="totalCount>perPage" class="pt-3" align-h="center">
         <b-pagination 
+         
           :total-rows="totalCount" 
           :value="currentPage" 
           :per-page="perPage"
