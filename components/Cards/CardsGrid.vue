@@ -23,7 +23,7 @@
 
 
 <script>
-import Card from "@/components/Cards/Card.vue";
+import Card from "./Card";
 export default {
   components: {
     Card
