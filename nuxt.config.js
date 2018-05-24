@@ -3,28 +3,42 @@ module.exports = {
   mode: 'universal',
 
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     title: pkg.name,
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+    meta: [{
+        charset: 'utf-8'
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content: pkg.description
+      }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    }]
   },
 
   /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#26c9cf', height: '5px', duration: 5000 },
+   ** Customize the progress-bar color
+   */
+  loading: {
+    color: '#26c9cf',
+    height: '5px',
+    duration: 5000
+  },
 
   /*
-  ** Global CSS
-  */
+   ** Global CSS
+   */
   css: [
     '~assets/styles/transition.css'
   ],
@@ -35,16 +49,18 @@ module.exports = {
   },
 
   /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-    { src: '~/plugins/vue-search-select.js', ssr: false},
+   ** Plugins to load before mounting the App
+   */
+  plugins: [{
+      src: '~/plugins/vue-search-select.js',
+      ssr: false
+    },
     '~plugins/directives.js'
   ],
 
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
@@ -53,20 +69,19 @@ module.exports = {
     '@nuxtjs/dotenv'
   ],
   /*
-  ** Axios module configuration
-  */
+   ** Axios module configuration
+   */
   axios: {
-    baseURL: 'http://127.0.0.1:3000/api',
-    browserBaseURL: 'http://35.192.139.25:3000/api'
+    baseURL: 'http://0.0.0.0:80/api'
   },
 
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** You can extend webpack config here
-    */
+     ** You can extend webpack config here
+     */
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

@@ -23,18 +23,18 @@
 
 
 <script>
-import Card from '@/components/cards/Card'
+import Card from "@/components/Cards/Card";
 export default {
-    components: {
-        Card
-    },
-    props: {
-        contacts: {
-            type: Array,
-            required: true
-        }
+  components: {
+    Card
+  },
+  props: {
+    contacts: {
+      type: Array,
+      required: true
     }
-}
+  }
+};
 </script>
 
 <style scoped>
