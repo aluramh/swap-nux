@@ -13,7 +13,6 @@ const state = {
   count: 0,
   // State for the pagination
   // contactsPage: [], // Dynamically calculated for now.
-  currentPageData: [],
   pageSize: 5,
   currentPage: 1
 };
@@ -22,8 +21,11 @@ const getters = {
   getContacts: state => state.contacts,
   getContactsCount: state => state.count,
   getPageSize: state => state.pageSize,
-  getContactsPage: state => {
-    return state.contacts.slice(0, state.pageSize);
+  getContactsPage: ({ contacts, pageSize, currentPage }) => {
+    // Split all the data into arrays of the same size.
+    const chunkedData = chunk(contacts, pageSize);
+    // Return the specific page signaled by the state (Remember arrays start at "0").
+    return chunkedData[currentPage - 1];
   },
   getCurrentPage: state => state.currentPage
 };

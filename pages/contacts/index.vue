@@ -1,79 +1,31 @@
 <template>
-  <div>
-    <h1>Contacts</h1>
-
-    <b-row align-h="end"> 
-      <b-col cols="6" >
-        <no-ssr>
-          <div>
-            <!-- <pre>{{pageSize}}</pre> -->
-            <!-- <SearchContact /> -->
-          </div>
-        </no-ssr>
-      </b-col>
-    </b-row>
-
-    <CardsGrid :contacts="contactsPage" />
-
-    <!-- Pagination -->
-    <div class="d-flex flex-row justify-content-end">
-      <div class="align-self-center">Page size:</div>
-
-      <select :value="pageSize" @change="onPageSizeChange" class="ml-2">
-        <option v-for="i in 7" :value="i * 5" :key="i">
-          {{ i * 5 }}
-        </option>
-      </select>
-
-      <b-pagination
-        :value="currentPage"
-        @change="onPageChange"
-        :total-rows="count" 
-        :per-page="pageSize"
-        :limit="3"
-        class="m-0 ml-3"
-        size="md" 
-        hide-ellipsis
-        hide-goto-end-buttons
-      />
-    </div>
-  </div>
+  <b-row>
+    <b-col col xs="12" sm="1" md="2">
+      <Sidebar :hideSidebarHandler="hideSidebar" />
+    </b-col>
+    <b-col>
+      <ContactsPage class="container-fluid"/>
+    </b-col>
+  </b-row>
 </template>
 
-
 <script>
-import { mapGetters } from "vuex";
-import CardsGrid from "@/components/Cards/CardsGrid";
-import SearchContact from "@/components/Contacts/SearchContact";
-import axios from "axios";
+import ContactsPage from "@/components/pages/contacts";
+import Sidebar from "@/components/pages/contacts/Sidebar";
 
 export default {
   components: {
-    CardsGrid,
-    SearchContact
+    ContactsPage,
+    Sidebar
   },
   // This fetch() executes each time the page is reloaded. This is to make sure you always
   // get the latest information.
   async fetch({ store }) {
     await store.dispatch("fetchContacts");
   },
-  computed: {
-    ...mapGetters({
-      contacts: "getContacts",
-      contactsCount: "getContactsCount",
-      contactsPage: "getContactsPage",
-      pageSize: "getPageSize",
-      currentPage: "getCurrentPage",
-      count: "getContactsCount"
-    })
-  },
   methods: {
-    onPageSizeChange(e) {
-      const newVal = Number(e.target.value);
-      this.$store.dispatch("setPageSize", newVal);
-    },
-    onPageChange(pageNo) {
-      this.$store.dispatch("setCurrentPage", pageNo);
+    hideSidebar() {
+      console.log("hideSidebar");
     }
   }
 };

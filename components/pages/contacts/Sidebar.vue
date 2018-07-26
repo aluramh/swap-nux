@@ -1,0 +1,37 @@
+<template>
+  <b-col cols="2" class="sidebar">
+    <b-row class="justify-content-center">
+      <b-col>
+        <b-button variant="link" @click="hideSidebarHandler">
+          Hide Filters
+        </b-button>
+      </b-col>    
+    </b-row>
+    <b-row class="justify-content-center">
+      <b-col>
+        <b-button variant="link">Clear All</b-button>
+      </b-col>    
+    </b-row>
+    <b-row class="justify-content-center">
+      <b-col>
+        <CategoryFilter/>
+      </b-col>    
+    </b-row>
+  </b-col>
+</template>
+
+<script>
+import CategoryFilter from "@/components/Filters/CategoryFilter";
+
+export default {
+  props: {
+    hideSidebarHandler: {
+      type: Function,
+      default: () => {}
+    }
+  },
+  components: {
+    CategoryFilter
+  }
+};
+</script>
