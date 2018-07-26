@@ -1,4 +1,14 @@
-# swap-nuxt
+# Environment setup
+
+The project requires a `.env` in the root directory with the Couchbase credentials.
+
+The structure of the `.env` is the next one:
+
+```
+COUCHBASE_HOST=127.0.0.0
+COUCHBASE_USER=couchbase-user
+COUCHBASE_PASS=couchbase-password
+```
 
 > Swap Nuxt
 
