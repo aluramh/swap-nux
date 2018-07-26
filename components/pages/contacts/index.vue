@@ -13,7 +13,6 @@
       </b-col>
     </b-row>
 
-    <pre>{{contacts}}</pre>
     <CardsGrid v-if="contactsPage" :contacts="contactsPage" />
 
     <!-- Pagination -->

@@ -23,11 +23,15 @@
     "vue-search-select": "^2.6.1"
   },
   "devDependencies": {
-    "cross-env": "^5.0.1",
     "babel-eslint": "^8.2.1",
+    "cross-env": "^5.0.1",
     "eslint": "^4.15.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-vue": "^4.0.0",
-    "nodemon": "^1.11.0"
+    "node-sass": "^4.9.2",
+    "nodemon": "^1.11.0",
+    "sass-loader": "^7.0.3",
+    "vue-style-loader": "^4.1.1"
   }
 }
+ 

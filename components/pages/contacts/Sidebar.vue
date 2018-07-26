@@ -1,37 +1,31 @@
 <template>
-  <b-col cols="2" class="sidebar">
-    <b-row class="justify-content-center">
-      <b-col>
-        <b-button variant="link" @click="hideSidebarHandler">
-          Hide Filters
-        </b-button>
-      </b-col>    
-    </b-row>
-    <b-row class="justify-content-center">
-      <b-col>
-        <b-button variant="link">Clear All</b-button>
-      </b-col>    
-    </b-row>
-    <b-row class="justify-content-center">
-      <b-col>
-        <CategoryFilter/>
-      </b-col>    
-    </b-row>
-  </b-col>
+  <div class="px-2 py-3">
+    <Button @click="hideSidebarHandler">
+      Hide Filters
+    </Button>
+
+    <Button @click="hideSidebarHandler">
+      Clear All
+    </Button>
+
+    <CategoryFilter />
+  </div>
 </template>
 
 <script>
 import CategoryFilter from "@/components/Filters/CategoryFilter";
+import Button from "@/components/shared/Button.vue";
 
 export default {
+  components: {
+    CategoryFilter,
+    Button
+  },
   props: {
     hideSidebarHandler: {
       type: Function,
       default: () => {}
     }
-  },
-  components: {
-    CategoryFilter
   }
 };
 </script>
