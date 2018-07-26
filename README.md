@@ -1,4 +1,6 @@
-# Environment setup
+## Swap app front-end
+
+## Environment setup
 
 The project requires a `.env` in the root directory with the Couchbase credentials.
 
