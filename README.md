@@ -1,4 +1,4 @@
-## Swap app front-end
+# Swap app front-end
 
 ## Environment setup
 
