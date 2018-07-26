@@ -1,9 +1,8 @@
 <template>
-  <b-row class="justify-content-center"> 
-    <b-col>
-      <h1>{{contact.name}}</h1>
-    </b-col>
-  </b-row>
+  <div class="container-fluid">
+    <h2>{{ contact.name }}</h2>
+    <pre>{{ contact }}</pre>
+  </div>
 </template>
 
 <script>
@@ -14,19 +13,18 @@ export default {
     Card
   },
   validate({ params, store }) {
-    return (
-      /^\d+$/.test(params.id) &&
-      store.state.allContacts.some(contact => contact.id === params.id)
-    );
+    return /^\d+$/.test(params.id);
   },
-  data() {
-    return {
-      contact: Object
-    };
-  },
-  created() {
-    let contact = this.$store.getters.contactById(this.$route.params.id);
-    this.contact = contact;
+  // This logic of fetching the specific ID should be in asyncData()
+  // when it is moved to an API call.
+  async asyncData({ params, app }) {
+    try {
+      const { data } = await app.$axios.get(`/contacts/${params.id}`);
+      return { contact: data };
+    } catch (e) {
+      console.error(e);
+      return { contact: {} };
+    }
   }
 };
 </script>

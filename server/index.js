@@ -5,11 +5,9 @@ const host = process.env.HOST || "localhost";
 const port = process.env.PORT || 3000;
 require("dotenv").config();
 
-const routes = require("./routes");
-
 app.set("port", port);
 
-app.use("/api", routes);
+app.use("/api", require("./routes"));
 
 // Import and Set Nuxt.js options
 let config = require("../nuxt.config.js");
