@@ -1,37 +1,48 @@
 <template>
   <div>
-    <h2>Contacts:</h2>
-    <h1>{{ contactsCount }}</h1>
-    <pre>{{ contacts }}</pre>
-    <!-- <pre>{{ $data }}</pre> -->
-    <!-- <b-row align-h="end"> 
+    <h1>Contacts</h1>
+
+    <b-row align-h="end"> 
       <b-col cols="6" >
         <no-ssr>
-          <SearchContact/>
+          <div>
+            <!-- <pre>{{pageSize}}</pre> -->
+            <!-- <SearchContact /> -->
+          </div>
         </no-ssr>
       </b-col>
-    </b-row> -->
+    </b-row>
 
-    <!-- <CardsGrid :contacts="contactsToDisplay" /> -->
+    <CardsGrid :contacts="contactsPage" />
 
-    <!-- <b-row 
-      v-if="totalCount > perPage" 
-      class="pt-3" 
-      align-h="center"
-    >
-      <b-pagination 
-        :total-rows="totalCount" 
-        :value="currentPage" 
-        :per-page="perPage"
-        @input="changePage" 
+    <!-- Pagination -->
+    <div class="d-flex flex-row justify-content-end">
+      <div class="align-self-center">Page size:</div>
+
+      <select :value="pageSize" @change="onPageSizeChange" class="ml-2">
+        <option v-for="i in 7" :value="i * 5" :key="i">
+          {{ i * 5 }}
+        </option>
+      </select>
+
+      <b-pagination
+        :value="currentPage"
+        @change="onPageChange"
+        :total-rows="count" 
+        :per-page="pageSize"
+        :limit="3"
+        class="m-0 ml-3"
+        size="md" 
         hide-ellipsis
+        hide-goto-end-buttons
       />
-    </b-row> -->
+    </div>
   </div>
 </template>
 
 
 <script>
+import { mapGetters } from "vuex";
 import CardsGrid from "@/components/Cards/CardsGrid";
 import SearchContact from "@/components/Contacts/SearchContact";
 import axios from "axios";
@@ -47,11 +58,22 @@ export default {
     await store.dispatch("fetchContacts");
   },
   computed: {
-    contacts() {
-      return this.$store.getters.getContacts;
+    ...mapGetters({
+      contacts: "getContacts",
+      contactsCount: "getContactsCount",
+      contactsPage: "getContactsPage",
+      pageSize: "getPageSize",
+      currentPage: "getCurrentPage",
+      count: "getContactsCount"
+    })
+  },
+  methods: {
+    onPageSizeChange(e) {
+      const newVal = Number(e.target.value);
+      this.$store.dispatch("setPageSize", newVal);
     },
-    contactsCount() {
-      return this.$store.getters.getContactsCount;
+    onPageChange(pageNo) {
+      this.$store.dispatch("setCurrentPage", pageNo);
     }
   }
 };

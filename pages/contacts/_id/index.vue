@@ -1,13 +1,14 @@
 <template>
-    <b-row class="justify-content-center"> 
-        <b-col>
-            <h1>{{contact.name}}</h1>
-        </b-col>
-    </b-row>
+  <b-row class="justify-content-center"> 
+    <b-col>
+      <h1>{{contact.name}}</h1>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
 import Card from "@/components/Cards/Card.vue";
+
 export default {
   components: {
     Card

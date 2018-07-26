@@ -1,4 +1,4 @@
-import Vue from 'vue'
-import {ListSelect} from 'vue-search-select'
+import Vue from "vue";
+import { ListSelect } from "vue-search-select";
 
-Vue.component('v-search', ListSelect)
+Vue.component("v-search", ListSelect);
