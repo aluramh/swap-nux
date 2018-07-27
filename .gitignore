@@ -1,7 +1,5 @@
 # dependencies
 node_modules
-.env
-launch.json
 
 # logs
 npm-debug.log
@@ -11,4 +9,6 @@ npm-debug.log
 
 # Nuxt generate
 dist
-.DS_Store
+
+# Backpack build
+build

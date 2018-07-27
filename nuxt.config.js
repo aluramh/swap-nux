@@ -1,89 +1,31 @@
-const pkg = require('./package')
 module.exports = {
-  mode: 'universal',
-
   /*
-   ** Headers of the page
-   */
+  ** Headers of the page
+  */
   head: {
-    title: pkg.name,
-    meta: [{
-        charset: 'utf-8'
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content: pkg.description
-      }
+    title: 'starter',
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
-    link: [{
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicon.ico'
-    }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ]
   },
-
   /*
-   ** Customize the progress-bar color
-   */
-  loading: {
-    color: '#26c9cf',
-    height: '5px',
-    duration: 5000
-  },
-
+  ** Global CSS
+  */
+  css: ['~/assets/css/main.css'],
   /*
-   ** Global CSS
-   */
-  css: [
-    '~assets/styles/transition.css'
-  ],
-
-  transition: {
-    name: 'fade',
-    mode: 'out-in'
-  },
-
-  /*
-   ** Plugins to load before mounting the App
-   */
-  plugins: [{
-      src: '~/plugins/vue-search-select.js',
-      ssr: false
-    },
-    '~plugins/directives.js'
-  ],
-
-  /*
-   ** Nuxt.js modules
-   */
-  modules: [
-    // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios',
-    // Doc: https://bootstrap-vue.js.org/docs/
-    'bootstrap-vue/nuxt',
-    '@nuxtjs/dotenv'
-  ],
-  /*
-   ** Axios module configuration
-   */
-  axios: {
-    prefix: '/api'
-  },
-
-  /*
-   ** Build configuration
-   */
+  ** Add axios globally
+  */
   build: {
+    vendor: ['axios'],
     /*
-     ** You can extend webpack config here
-     */
-    extend(config, ctx) {
-      // Run ESLint on save
+    ** Run ESLINT on save
+    */
+    extend (config, ctx) {
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -93,5 +35,9 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  serverMiddleware: [
+    // API middleware
+    '~/api/index.js'
+  ]
 }
