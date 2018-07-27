@@ -1,9 +1,11 @@
 const express = require("express");
 const { Nuxt, Builder } = require("nuxt");
 const app = express();
+require("dotenv").config();
+
 const host = process.env.HOST || "localhost";
 const port = process.env.PORT || 3000;
-require("dotenv").config();
+// require("./config/passport");
 
 app.set("port", port);
 
