@@ -1,6 +1,6 @@
 const couchbase = require("couchbase");
 const N1qlQuery = couchbase.N1qlQuery;
-const queryBucket = require("../config/couchbase");
+const { queryBucket } = require("../config/couchbase");
 
 module.exports = {
   async getContacts() {
