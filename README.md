@@ -1,6 +1,6 @@
-# {{ name }}
+# new-new-swap
 
-> {{ description }}
+> Nuxt.js project
 
 ## Build Setup
 

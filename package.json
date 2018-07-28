@@ -1,8 +1,8 @@
 {
-  "name": "{{ name }}",
+  "name": "new-new-swap",
   "version": "1.0.0",
-  "description": "{{ description }}",
-  "author": "{{ author }}",
+  "description": "Nuxt.js project",
+  "author": "Alex R. <aluramh@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "couchbase": "^2.5.1",
     "cross-env": "^5.0.1",
+    "dotenv": "^6.0.0",
     "express": "^4.15.3",
     "nuxt": "latest",
     "source-map-support": "^0.4.15"
