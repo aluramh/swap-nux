@@ -1,27 +1,17 @@
 <template>
-  <button 
-    v-on="inputListeners" 
-    class="button__sidebar"
-    :class="variantClass"
-  >
-    <slot />
-  </button>
+  <input class="swap__input" :value="value" v-on="inputListeners">
 </template>
 
 <script>
 export default {
   props: {
-    variant: {
+    value: [Number, String],
+    color: {
       type: String,
-      // Options: ["flat"]
-      default: ""
+      default: "#09edce"
     }
   },
   computed: {
-    variantClass() {
-      const { variant } = this;
-      return variant ? `button__sidebar--${variant}` : "";
-    },
     inputListeners() {
       return {
         // We add all the listeners from the parent
@@ -40,22 +30,17 @@ export default {
 </script>
 
 <style lang="scss">
-.button__sidebar {
-  height: 40px;
-  cursor: pointer;
-  transition: all 250ms;
+.swap__input {
+  background-color: #fafafa;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 2px;
   outline: none !important;
+  height: 40px;
+  padding: 8px;
+  padding-right: 0px;
 
-  &--flat {
-    color: gray;
-    background-color: transparent;
-    padding: 0.3rem 0.4rem;
-    border: none;
-    border-radius: 4px;
-    &:hover,
-    &:focus {
-      background-color: lightgrey;
-    }
+  &:focus {
+    border-color: rgb(170, 170, 170);
   }
 }
 </style>

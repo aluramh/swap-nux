@@ -7,7 +7,7 @@
     <b-col>
       <div class="container-fluid">
         <div class="d-flex flex-row">
-          <Button @click="toggleSidebar" class="my-3">
+          <Button @click="toggleSidebar" variant="flat" class="my-3">
             {{ sidebarButtonText }}
           </Button>
         </div>
