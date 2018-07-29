@@ -3,7 +3,7 @@
 
     <b-card class="swap-card" header-class="swap-header"> 
       <slot slot="header">
-        <div v-swap-color="contactType"/>
+        <div />
       </slot>
       <div class="card-text">
         <ul>

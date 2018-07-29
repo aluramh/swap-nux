@@ -40,18 +40,27 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/css/variables.scss";
+
 .button__sidebar {
   height: 40px;
   cursor: pointer;
   transition: all 250ms;
   outline: none !important;
+  border-radius: 4px;
+  border: none;
+  color: white;
+  background-color: $primary;
+  &:hover,
+  &:focus {
+    background-color: $primary-dark;
+  }
 
   &--flat {
     color: gray;
     background-color: transparent;
     padding: 0.3rem 0.4rem;
     border: none;
-    border-radius: 4px;
     &:hover,
     &:focus {
       background-color: lightgrey;
