@@ -1,7 +1,7 @@
 <template>
   <b-form>
     <b-form-group label="Categories">
-      {{selected}}
+      {{ selected }}
       <b-form-checkbox-group
         v-model="selected" 
         :options="options"
@@ -27,4 +27,3 @@ export default {
   }
 };
 </script>
-

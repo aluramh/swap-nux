@@ -1,8 +1,8 @@
 <template>
   <button 
-    v-on="inputListeners" 
+    :class="variantClass" 
     class="button__sidebar"
-    :class="variantClass"
+    v-on="inputListeners"
   >
     <slot />
   </button>

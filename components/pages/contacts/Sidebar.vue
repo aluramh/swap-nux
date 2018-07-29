@@ -1,10 +1,18 @@
 <template>
   <div class="px-2 py-3">
-    <Button @click="hideSidebarHandler" class="w-100 text-left mb-2" variant="flat">
+    <Button 
+      class="w-100 text-left mb-2" 
+      variant="flat" 
+      @click="hideSidebarHandler"
+    >
       Hide Filters
     </Button>
 
-    <Button @click="hideSidebarHandler" class="w-100 text-left mb-2" variant="flat">
+    <Button 
+      class="w-100 text-left mb-2" 
+      variant="flat" 
+      @click="hideSidebarHandler"
+    >
       Clear All
     </Button>
 
