@@ -11,8 +11,8 @@
           </p>
         </div>
 
-        <Input placeholder="Email or username" class="w-100 mb-2" />
-        <Input placeholder="Password" class="w-100 mb-2" />
+        <InputField placeholder="Email or username" class="w-100 mb-2" />
+        <InputField placeholder="Password" class="w-100 mb-2" />
 
         <Button class="w-100">
           Log in
@@ -23,12 +23,12 @@
 </template>
 
 <script>
-import Input from "@/components/shared/Input";
+import InputField from "@/components/shared/Input";
 import Button from "@/components/shared/Button";
 
 export default {
   components: {
-    Input,
+    InputField,
     Button
   }
 };

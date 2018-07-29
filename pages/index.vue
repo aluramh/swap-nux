@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    Main page
+  </div>
 </template>
 
 <script>
@@ -10,8 +12,7 @@ export default {
   //   this.ip = ip;
   // },
   beforeCreate() {
-    this.$router.push("/contacts");
+    // this.$router.push("/contacts");
   }
 };
 </script>
-

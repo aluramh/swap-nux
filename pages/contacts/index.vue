@@ -7,7 +7,7 @@
     <b-col>
       <div class="container-fluid">
         <div class="d-flex flex-row">
-          <Button @click="toggleSidebar" variant="flat" class="my-3">
+          <Button variant="flat" class="my-3" @click="toggleSidebar">
             {{ sidebarButtonText }}
           </Button>
         </div>
@@ -38,6 +38,12 @@ export default {
       showSidebar: true
     };
   },
+  computed: {
+    sidebarButtonText() {
+      const text = "Toggle sidebar";
+      return this.showSidebar ? `<< ${text}` : `${text} >>`;
+    }
+  },
   methods: {
     setSidebarVisibility(val) {
       this.showSidebar = val;
@@ -52,12 +58,6 @@ export default {
       setTimeout(() => {
         e.target.blur();
       }, 200);
-    }
-  },
-  computed: {
-    sidebarButtonText() {
-      const text = "Toggle sidebar";
-      return this.showSidebar ? `<< ${text}` : `${text} >>`;
     }
   }
 };
