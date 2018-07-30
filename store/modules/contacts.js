@@ -13,7 +13,7 @@ const state = {
   count: 0,
   // State for the pagination
   // contactsPage: [], // Dynamically calculated for now.
-  pageSize: 5,
+  pageSize: 15,
   currentPage: 1
 };
 
