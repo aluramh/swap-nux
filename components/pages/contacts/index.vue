@@ -13,28 +13,36 @@
       </b-col>
     </b-row>
 
-    <CardsGrid v-if="contactsPage" :contacts="contactsPage" />
+    <CardsGrid v-if="contactsPage" :contacts="contactsPage"/>
 
     <!-- Pagination -->
     <div class="d-flex flex-row justify-content-end">
       <div class="align-self-center">Page size:</div>
 
-      <select :value="pageSize" @change="onPageSizeChange" class="ml-2">
-        <option v-for="i in 7" :value="i * 5" :key="i">
+      <select 
+        :value="pageSize" 
+        class="ml-2" 
+        @change="onPageSizeChange"
+      >
+        <option 
+          v-for="i in 7" 
+          :value="i * 5" 
+          :key="i"
+        >
           {{ i * 5 }}
         </option>
       </select>
 
       <b-pagination
         :value="currentPage"
-        @change="onPageChange"
-        :total-rows="count" 
-        :per-page="pageSize"
+        :total-rows="count"
+        :per-page="pageSize" 
         :limit="3"
         class="m-0 ml-3"
-        size="md" 
-        hide-ellipsis
+        size="md"
+        hide-ellipsis 
         hide-goto-end-buttons
+        @change="onPageChange"
       />
     </div>
   </div>

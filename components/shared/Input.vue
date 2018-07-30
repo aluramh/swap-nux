@@ -1,11 +1,18 @@
 <template>
-  <input class="swap__input" :value="value" v-on="inputListeners">
+  <input 
+    :value="value" 
+    class="swap__input" 
+    v-on="inputListeners"
+  >
 </template>
 
 <script>
 export default {
   props: {
-    value: [Number, String],
+    value: {
+      type: [Number, String],
+      default: undefined
+    },
     color: {
       type: String,
       default: "#09edce"

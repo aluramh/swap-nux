@@ -49,7 +49,7 @@ const actions = {
   // nuxtServerInit() is executed once the app server is initialized.
   // nuxtServerInit({ commit }, { app }) {},
   async fetchContacts({ commit }) {
-    const { data, count } = await this.$axios.$get("/contacts");
+    const { data, count } = await this.$axios.$get("/api/contacts");
 
     commit(types.SET_CONTACTS, data);
     commit(types.SET_CONTACTS_COUNT, count);

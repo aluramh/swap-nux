@@ -50,7 +50,7 @@ function getDocument(bucketName = "contacts", docID) {
     bucket.get(docID, (err, data) => {
       closeBucket(bucket);
 
-      if (err) return reject(error);
+      if (err) return reject(err);
       resolve(data);
     });
   });
