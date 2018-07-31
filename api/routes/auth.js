@@ -7,11 +7,11 @@ const passport = require("passport");
 /* POST login. */
 router.post("/login", function(req, res, next) {
   passport.authenticate("local", { session: false }, (err, user, info) => {
-    console.log(err);
     if (err || !user) {
-      return res.status(400).json({
+      return res.status(400).send({
         message: info ? info.message : "Login failed",
-        user: user
+        user: user,
+        err
       });
     }
 
@@ -24,7 +24,7 @@ router.post("/login", function(req, res, next) {
 
       return res.json({ user, token });
     });
-  })(req, res);
+  })(req, res, next);
 });
 
 module.exports = router;

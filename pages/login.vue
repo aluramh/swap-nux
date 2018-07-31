@@ -11,12 +11,14 @@
           </p>
         </div>
 
-        <InputField placeholder="Email or username" class="w-100 mb-2" />
-        <InputField placeholder="Password" class="w-100 mb-2" />
+        <form @submit.prevent="handleFormSubmission">
+          <InputField v-model="username" placeholder="Email or username" type="email" class="w-100 mb-2" />
+          <InputField v-model="password" placeholder="Password" type="password" class="w-100 mb-2" />
 
-        <Button class="w-100">
-          Log in
-        </Button>
+          <Button class="w-100">
+            Log in
+          </Button>
+        </form>
       </div>
     </div>
   </div>
@@ -30,6 +32,27 @@ export default {
   components: {
     InputField,
     Button
+  },
+  data() {
+    return {
+      username: "alejandro.ramirez@jonajo.com",
+      password: "alex123"
+    };
+  },
+  methods: {
+    test() {
+      this.username = "alejandro.ramirez@jonajo.com";
+    },
+    handleFormSubmission(e) {
+      try {
+        const { username, password } = this;
+        console.log("formPayload", { username, password });
+
+        this.$axios.post("/api/auth/login", { username, password });
+      } catch (e) {
+        console.error(e);
+      }
+    }
   }
 };
 </script>

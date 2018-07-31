@@ -1,13 +1,22 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const passport = require("./config/passport");
 
-// Create express instnace
+// Create express instance
 const app = express();
 
-// Require API routes
-const routes = require("./routes");
+app.locals.string1 = "This is inside locals";
 
-// Import API Routes
-app.use(routes);
+// parse application/x-www-form-urlencoded
+// for easier testing with Postman or plain HTML forms
+app.use(bodyParser.urlencoded({ extended: true }));
+// parse application/json
+app.use(bodyParser.json());
+
+// Require and use the API routes
+app.use(passport.initialize());
+app.use(require("./config/allowedOrigins"));
+app.use(require("./routes"));
 
 // Export the server middleware
 module.exports = {
