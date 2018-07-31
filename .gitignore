@@ -1,6 +1,7 @@
 # dependencies
 node_modules
 .env
+launch.json
 
 # logs
 npm-debug.log
