@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       username: "swaptest@email.com",
-      password: "920805"
+      password: "swap123"
     };
   },
   methods: {
