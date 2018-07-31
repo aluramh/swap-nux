@@ -2,7 +2,14 @@
 // are allowed to come from.
 
 const port = process.env.PORT || 3000;
-const allowedOrigins = [`http://localhost:${port}`, `http://127.0.0.1:${port}`];
+const host = process.env.HOST || "0.0.0.0";
+
+const allowedOrigins = [
+  `http://localhost:${port}`,
+  `http://127.0.0.1:${port}`,
+  `http://${host}:${port}`,
+  "http://35.192.139.25"
+];
 
 module.exports = (req, res, next) => {
   const origin = req.headers.origin;
