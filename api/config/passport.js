@@ -16,7 +16,9 @@ const LocalStrategyHandler = new LocalStrategy((username, password, cb) => {
 
   // Call the DB to query for similar users in the DB.
   return UserModel.getUser("-HWxC3twUx1iVI8N04xT89L")
-    .then(user => {
+    .then(rows => {
+      const user = rows.value;
+
       // Check if it exists, or send error.
       if (!user) {
         return cb("User not found");

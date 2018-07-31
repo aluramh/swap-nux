@@ -35,8 +35,8 @@ export default {
   },
   data() {
     return {
-      username: "alejandro.ramirez@jonajo.com",
-      password: "alex123"
+      username: "swaptest@email.com",
+      password: "920805"
     };
   },
   methods: {

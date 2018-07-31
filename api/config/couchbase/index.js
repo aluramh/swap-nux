@@ -1,8 +1,12 @@
-const getCluster = require("./couchbase/config");
+const getCluster = require("./config");
+let cluster = null;
 
 function getBucket(bucketName) {
-  // Get a Cluster connection.
-  const cluster = getCluster();
+  // If there is no cluster connection, make one and save it.
+  if (!cluster) {
+    // Get a Cluster connection.
+    cluster = getCluster();
+  }
 
   // Open the bucket connection.
   const bucket = cluster.openBucket(bucketName);
@@ -35,6 +39,8 @@ function queryBucket(bucketName = "contacts", query) {
   });
 }
 
+// This function creates a bucket, queries for an ID, closes the bucket and
+// handles the response/error.
 function getDocument(bucketName = "contacts", docID) {
   return new Promise((resolve, reject) => {
     // Open the bucket connection.
