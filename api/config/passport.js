@@ -3,6 +3,7 @@ const passportJWT = require("passport-jwt");
 const LocalStrategy = require("passport-local").Strategy;
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
+const bcrypt = require("bcrypt");
 const UserModel = require("../models/user");
 // const getDocument = require("../config/couchbase").getDocument;
 
@@ -15,17 +16,22 @@ const LocalStrategyHandler = new LocalStrategy((username, password, cb) => {
   // });
 
   // Call the DB to query for similar users in the DB.
-  return UserModel.getUser("-HWxC3twUx1iVI8N04xT89L")
-    .then(rows => {
-      const user = rows.value;
+  return UserModel.getUserByFields({ email: username })
+    .then(async rows => {
+      // Get the "user_bucket" (a.k.a.: value) from the first item in the array.
+      const [{ user_bucket: user }] = rows;
 
       // Check if it exists, or send error.
       if (!user) {
         return cb("User not found");
       }
 
+      // Now that we know the user exists, we encrypt the plaintext from the
+      // login form. This is delayed because the encryption is CPU-intensive
+      // so this way we are not wasting resources.
+      const match = await bcrypt.compare(password, user.password);
       // Check if the password matches, or send error.
-      if (user.password != password) {
+      if (!match) {
         return cb("Password mismatch");
       }
 
@@ -34,7 +40,7 @@ const LocalStrategyHandler = new LocalStrategy((username, password, cb) => {
     })
     .catch(err => {
       console.error(err);
-      return err;
+      return cb(err);
     });
 });
 
