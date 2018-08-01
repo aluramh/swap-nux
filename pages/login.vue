@@ -1,5 +1,8 @@
 <template>
   <div class="App__background">
+    <h3>Response</h3>
+    <div>{{ token }}</div>
+
     <div class="login__container container py-3">
       <div class="login__jumbotron">
         <h2 class="text-center">Swap</h2>
@@ -27,6 +30,7 @@
 <script>
 import InputField from "@/components/shared/Input";
 import Button from "@/components/shared/Button";
+import { setLocalStorage, getLocalStorage } from "@/utilities";
 
 export default {
   components: {
@@ -36,19 +40,37 @@ export default {
   data() {
     return {
       username: "swaptest@email.com",
-      password: "swap123"
+      password: "swap123",
+      token: ""
     };
   },
+  created() {
+    if (process.browser) {
+      const storageToken = getLocalStorage("token", false);
+      if (storageToken) this.token = storageToken;
+    }
+  },
   methods: {
-    test() {
-      this.username = "alejandro.ramirez@jonajo.com";
-    },
-    handleFormSubmission(e) {
+    async handleFormSubmission(e) {
       try {
         const { username, password } = this;
-        console.log("formPayload", { username, password });
 
-        this.$axios.post("/api/auth/login", { username, password });
+        const response = await this.$axios.post("/api/auth/login", {
+          username,
+          password
+        });
+        // eslint-disable-next-line
+        const { data: { user, token } } = response;
+
+        // Save the token for use in the localStorage.
+        setLocalStorage("token", token, false);
+        this.token = token;
+
+        // Set the user session in the Vuex "user" module in the store.
+        // ...
+
+        // Redirect user to [page] for successful login.
+        // ...
       } catch (e) {
         console.error(e);
       }
