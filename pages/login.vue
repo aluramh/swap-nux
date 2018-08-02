@@ -1,7 +1,7 @@
 <template>
   <div class="App__background">
     <h3>Response</h3>
-    <div>{{ token }}</div>
+    <div>{{ $store.getters.getToken }}</div>
 
     <div class="login__container container py-3">
       <div class="login__jumbotron">
@@ -28,9 +28,9 @@
 </template>
 
 <script>
+import { setLocalStorage, getLocalStorage } from "@/utilities";
 import InputField from "@/components/shared/Input";
 import Button from "@/components/shared/Button";
-import { setLocalStorage, getLocalStorage } from "@/utilities";
 
 export default {
   components: {
@@ -51,29 +51,12 @@ export default {
     }
   },
   methods: {
-    async handleFormSubmission(e) {
-      try {
-        const { username, password } = this;
-
-        const response = await this.$axios.post("/api/auth/login", {
-          username,
-          password
-        });
-        // eslint-disable-next-line
-        const { data: { user, token } } = response;
-
-        // Save the token for use in the localStorage.
-        setLocalStorage("token", token, false);
-        this.token = token;
-
-        // Set the user session in the Vuex "user" module in the store.
-        // ...
-
-        // Redirect user to [page] for successful login.
-        // ...
-      } catch (e) {
-        console.error(e);
-      }
+    handleFormSubmission(e) {
+      console.log(this.username, this.password);
+      this.$store.dispatch("handleLogin", {
+        username: this.username,
+        password: this.password
+      });
     }
   }
 };
