@@ -44,6 +44,26 @@ const LocalStrategyHandler = new LocalStrategy((username, password, cb) => {
     });
 });
 
+const JWTStrategyHandler = new JWTStrategy(
+  {
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    secretOrKey: "your_jwt_secret"
+  },
+  async (jwtPayload, cb) => {
+    //find the user in db if needed. This functionality may be omitted if
+    // you store everything you'll need in JWT payload.
+    return UserModel.getUser(jwtPayload.docID)
+      .then(user => {
+        return cb(null, user);
+      })
+      .catch(err => {
+        console.error(err);
+        return cb(err);
+      });
+  }
+);
+
+passport.use(JWTStrategyHandler);
 passport.use(LocalStrategyHandler);
 
 module.exports = passport;

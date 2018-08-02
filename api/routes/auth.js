@@ -5,7 +5,17 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const encrypt = require("../config/encryption");
 
-/* POST login. */
+router.get(
+  "/user",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res, next) => {
+    const allowedFields = [];
+
+    return res.send({ user: req.user.value });
+  }
+);
+
+// POST for login
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", { session: false }, (err, user, info) => {
     if (err || !user) {
@@ -28,6 +38,8 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
+// POST for password encryption.
+// NOTE: may be moved to another server.
 router.post("/encrypt", async (req, res, next) => {
   try {
     // Get password from req.body and check if there indeed was a password.

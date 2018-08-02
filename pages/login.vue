@@ -2,6 +2,7 @@
   <div class="App__background">
     <h3>Response</h3>
     <div>{{ $store.getters.getToken }}</div>
+    <pre>{{ this.$auth.$state }}</pre>
 
     <div class="login__container container py-3">
       <div class="login__jumbotron">
@@ -52,10 +53,11 @@ export default {
   },
   methods: {
     handleFormSubmission(e) {
-      console.log(this.username, this.password);
-      this.$store.dispatch("handleLogin", {
-        username: this.username,
-        password: this.password
+      this.$auth.loginWith("local", {
+        data: {
+          username: this.username,
+          password: this.password
+        }
       });
     }
   }

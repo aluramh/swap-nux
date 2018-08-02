@@ -34,7 +34,42 @@ module.exports = {
       }
     }
   },
-  modules: ["@nuxtjs/axios", "bootstrap-vue/nuxt"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth", "bootstrap-vue/nuxt"],
+  auth: {
+    token: {
+      prefix: "_token."
+    },
+    localStorage: {
+      prefix: "auth."
+    },
+    // Options
+    redirect: {
+      login: "/contacts",
+      logout: "/",
+      callback: "/login",
+      user: "/profile"
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: "/api/auth/login",
+            method: "post",
+            propertyName: "token"
+          },
+          // logout: { url: "/api/auth/logout", method: "post" }
+          user: {
+            url: "/api/auth/user",
+            method: "get",
+            propertyName: "user"
+          }
+        }
+        // tokenRequired: true,
+        // tokenType: 'bearer',
+      }
+    }
+  },
+  // middleware: ["auth"],
   serverMiddleware: [
     // API middleware
     "~/api/index.js"
