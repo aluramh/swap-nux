@@ -1,9 +1,6 @@
 <template>
   <div class="App__background">
     <h3>Response</h3>
-    <div>{{ $store.getters.getToken }}</div>
-    <pre>{{ this.$auth.$state }}</pre>
-
     <div class="login__container container py-3">
       <div class="login__jumbotron">
         <h2 class="text-center">Swap</h2>
@@ -29,11 +26,11 @@
 </template>
 
 <script>
-import { setLocalStorage, getLocalStorage } from "@/utilities";
 import InputField from "@/components/shared/Input";
 import Button from "@/components/shared/Button";
 
 export default {
+  middleware: "login-redirect",
   components: {
     InputField,
     Button
@@ -44,12 +41,6 @@ export default {
       password: "swap123",
       token: ""
     };
-  },
-  created() {
-    if (process.browser) {
-      const storageToken = getLocalStorage("token", false);
-      if (storageToken) this.token = storageToken;
-    }
   },
   methods: {
     handleFormSubmission(e) {

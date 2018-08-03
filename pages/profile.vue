@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="container">
+    <div v-if="user && user.value" class="container">
       <h1>Profile</h1>
 
-      <table v-if="user && user.value">
+      <table>
         <tbody>
           <tr v-for="field in ['name', 'email', 'password']" :key="field">
             <th>{{ field }}</th>
@@ -21,9 +21,7 @@
 
 <script>
 export default {
-  // router: {
-  //   middleware: "auth"
-  // },
+  middleware: "auth",
   async asyncData({ app }) {
     const { data: user } = await app.$axios.get(`/api/user`);
     return { user };
