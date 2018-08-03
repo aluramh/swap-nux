@@ -5,12 +5,15 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const encrypt = require("../config/encryption");
 
+// Fields in this array are the only fields we will send to the front-end
+// in both the JWT token and the user data object.
+const allowedFields = [];
+
 router.get(
   "/user",
   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
-    const allowedFields = [];
-
+    // TO-DO: Filter out fields from the user. Use allowedFields(?)
     return res.send({ user: req.user.value });
   }
 );
@@ -38,6 +41,12 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
+// POST for logout
+router.post("/logout", (req, res, next) => {
+  req.logout();
+  res.json({ status: "OK" });
+});
+
 // POST for password encryption.
 // NOTE: may be moved to another server.
 router.post("/encrypt", async (req, res, next) => {
@@ -55,7 +64,6 @@ router.post("/encrypt", async (req, res, next) => {
     // Return encrypted password.
     res.send(encryptedPassword);
   } catch (e) {
-    // next(e);
     res.status(500).send(e);
   }
 });
