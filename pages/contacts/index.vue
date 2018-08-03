@@ -23,6 +23,7 @@ import Sidebar from "@/components/pages/contacts/Sidebar";
 import Button from "@/components/shared/Button.vue";
 
 export default {
+  middleware: ["auth"],
   components: {
     ContactsPage,
     Sidebar,

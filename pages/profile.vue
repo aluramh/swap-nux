@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  middleware: "auth",
+  middleware: ["auth"],
   async asyncData({ app }) {
     const { data: user } = await app.$axios.get(`/api/user`);
     return { user };

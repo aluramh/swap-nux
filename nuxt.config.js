@@ -44,10 +44,17 @@ module.exports = {
     },
     // Options
     redirect: {
-      login: "/contacts",
+      // login: User will be redirected to this path if login is required.
+      login: "/login",
+      // logout: User will be redirected to this path if after logout, current route is protected.
       logout: "/",
-      callback: "/login",
-      user: "/profile"
+      // home: User will be redirect to this path after login. (rewriteRedirects will rewrite this path)
+      home: "/profile",
+      // callback: User will be redirect to this path by the identity provider after login.
+      // (Should match configured Allowed Callback URLs (or similar setting) in your app/client
+      // with the identity provider)
+      // callback: "/login",
+      user: "/"
     },
     strategies: {
       local: {

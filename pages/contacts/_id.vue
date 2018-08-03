@@ -10,6 +10,7 @@
 import Card from "@/components/Cards/Card.vue";
 
 export default {
+  middleware: ["auth"],
   components: {
     Card
   },
