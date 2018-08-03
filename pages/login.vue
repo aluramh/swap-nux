@@ -1,39 +1,38 @@
 <template>
-  <div class="App__background">
-    <h3>Response</h3>
-    <div class="login__container container py-3">
-      <div class="login__jumbotron">
-        <h2 class="text-center">Swap</h2>
+  <div class="login__container container py-3">
+    <Jumbotron>
+      <h2 class="text-center">Swap</h2>
 
-        <div class="text-center">
-          <p>
-            This is a simple hero unit, a simple jumbotron-style component for
-            calling extra attention to featured content or information.
-          </p>
-        </div>
-
-        <form @submit.prevent="handleFormSubmission">
-          <InputField v-model="username" placeholder="Email or username" type="email" class="w-100 mb-2" />
-          <InputField v-model="password" placeholder="Password" type="password" class="w-100 mb-2" />
-
-          <Button class="w-100">
-            Log in
-          </Button>
-        </form>
+      <div class="text-center">
+        <p>
+          This is a simple hero unit, a simple jumbotron-style component for
+          calling extra attention to featured content or information.
+        </p>
       </div>
-    </div>
+
+      <form @submit.prevent="handleFormSubmission">
+        <InputField v-model="username" placeholder="Email or username" type="email" class="w-100 mb-2" />
+        <InputField v-model="password" placeholder="Password" type="password" class="w-100 mb-2" />
+
+        <Button class="w-100">
+          Log in
+        </Button>
+      </form>
+    </Jumbotron>
   </div>
 </template>
 
 <script>
 import InputField from "@/components/shared/Input";
 import Button from "@/components/shared/Button";
+import Jumbotron from "@/components/shared/Jumbotron";
 
 export default {
-  middleware: "login-redirect",
+  middleware: ["login-redirect"],
   components: {
     InputField,
-    Button
+    Button,
+    Jumbotron
   },
   data() {
     return {
@@ -56,20 +55,6 @@ export default {
 </script>
 
 <style>
-.App__background {
-  background-color: #fafafa;
-}
-
-.login__jumbotron {
-  max-width: 350px;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  border: 1px solid rgb(230, 230, 230);
-  background-color: white;
-  padding: 1.5rem 2rem 4rem 2rem;
-  border-radius: 2px;
-}
-
 .login__container {
   padding-top: 3rem !important;
   padding-bottom: 3rem !important;

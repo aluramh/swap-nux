@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <div class="App__background">
-      <b-container class="App__footer">
-        <p class="text-center">
-          © Property of Jonajo Consulting LLC
-        </p>
-      </b-container>
-    </div>
+  <div class="App__footer">
+    <b-container>
+      <p class="text-center">
+        © Property of Jonajo Consulting LLC
+      </p>
+    </b-container>
   </div>
 </template>
 
@@ -16,6 +14,7 @@
 .App__footer {
   padding: 38px 0;
   color: $secondary;
+  border-top: 1px solid $primary;
   // opacity: 0.6;
 
   & > p {

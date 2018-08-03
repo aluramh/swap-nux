@@ -18,16 +18,21 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item-dropdown v-if="$auth.loggedIn" right>
-            <!-- Using button-content slot -->
-            <template slot="button-content">
-              User
-            </template>
-            <b-dropdown-item to="/profile">Profile</b-dropdown-item>
-            <b-dropdown-item @click="handleLogout">Sign out</b-dropdown-item>
-          </b-nav-item-dropdown>
+          <template v-if="$auth.loggedIn">
+            <b-nav-item-dropdown right>
+              <!-- Using button-content slot -->
+              <template slot="button-content">
+                User
+              </template>
+              <b-dropdown-item to="/profile">Profile</b-dropdown-item>
+              <b-dropdown-item @click="handleLogout">Sign out</b-dropdown-item>
+            </b-nav-item-dropdown>
+          </template>
 
-          <b-nav-item v-else to="/login">Login</b-nav-item>
+          <template v-else>
+            <b-nav-item to="/login">Login</b-nav-item>
+            <b-nav-item to="/signup">Sign up</b-nav-item>
+          </template>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
