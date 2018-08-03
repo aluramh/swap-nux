@@ -30,11 +30,11 @@ docker run \
 You can also specify other environment variables like `API_URL_BROWSER`:
 
 ```
-docker run
+docker run \
   -p 80:3000 -d \
   -e API_URL_BROWSER='http://35.192.139.25' \
   -e API_URL='http://35.192.139.25' \
-  alex/swap-dev
+  alex/swap:1.1
 ```
 
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
