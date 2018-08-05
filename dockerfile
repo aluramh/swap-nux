@@ -3,6 +3,7 @@ FROM node:8.11.3-alpine
 ENV HOST 0.0.0.0
 
 EXPOSE 3000
+EXPOSE 80
 
 COPY . .
 
