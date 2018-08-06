@@ -21,6 +21,12 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+body {
+  font-family: "Nunito", sans-serif;
+}
+
 .App__background {
   background-color: #fafafa;
 }

@@ -2,7 +2,14 @@
   <div class="login__container container py-3">
     <Jumbotron class="mb-3">
       <h2 class="text-center">Swap</h2>
-
+      
+      <div class="text-center">
+        <p>
+          This is a simple hero unit, a simple jumbotron-style component for
+          calling extra attention to featured content or information.
+        </p>
+      </div>
+      
       <form @submit.prevent="handleSignup">
         <InputField v-model="firstname" placeholder="First name(s)" type="email" class="w-100 mb-2" />
         <InputField v-model="lastname" placeholder="Last name(s)" type="email" class="w-100 mb-2" />
