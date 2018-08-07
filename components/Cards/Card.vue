@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="'/contacts/' + contact.id">
+  <nuxt-link :to="`/contacts/${Number(contact._id)}`">
 
     <b-card class="swap-card" header-class="swap-header"> 
       <slot slot="header">

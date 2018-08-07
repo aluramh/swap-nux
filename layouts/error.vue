@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="container text-center">
     <img src="../assets/img/logo.png" alt="Nuxt.js Logo" class="logo">
 
     <h1 class="title">
@@ -11,7 +11,7 @@
     </h2>
 
     <nuxt-link v-if="error.statusCode === 404" to="/" class="button">
-      Homepage
+      Go back to Home
     </nuxt-link>
   </section>
 </template>

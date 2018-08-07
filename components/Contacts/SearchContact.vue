@@ -6,7 +6,7 @@
       :custom-text="customText"
       :selected-item="selectedContact"
       option-text="name"
-      option-value="id"
+      option-value="_id"
       placeholder="Search contact by name, position or company"
       @select="selectContact"
       @searchchange="searchContacts"

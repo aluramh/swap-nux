@@ -8,7 +8,7 @@
     >
       <div
         v-for="contact in contacts" 
-        :key="contact.id"
+        :key="contact._id"
         class="col-md-4 col-sm-6 col-xs-12 list-complete-item my-3"
       >
         <Card :contact="contact"/>

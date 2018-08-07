@@ -27,7 +27,7 @@ export default {
   name: "UserProfilePage",
   asyncData({ params, error }) {
     return axios
-      .get("/api/users/" + params.id)
+      .get(`/api/users/${params.id}`)
       .then(res => {
         return { user: res.data };
       })

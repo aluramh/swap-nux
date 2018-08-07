@@ -14,18 +14,32 @@ export default {
   components: {
     Card
   },
-  validate({ params, store }) {
-    return /^\d+$/.test(params.id);
+  validate({ params }) {
+    // Check if the requested Contact ID is a number.
+    const isNumber = /^\d+$/.test(params.id);
+    // Also check if it has leading "0". (Leading zeroes = doesn't exist).
+    const leadingZero = /^0/.test(params.id);
+
+    if (!isNumber || leadingZero) {
+      return false;
+    }
+    return true;
   },
-  // This logic of fetching the specific ID should be in asyncData()
-  // when it is moved to an API call.
-  async asyncData({ params, app }) {
+  async asyncData({ params, app, error }) {
     try {
-      const { data } = await app.$axios.get(`/api/contacts/${params.id}`);
-      return { contact: data };
+      const response = await app.$axios.get(
+        `/api/contacts/${Number(params.id)}`
+      );
+
+      return { contact: response.data };
     } catch (e) {
-      console.error(e);
-      return { contact: {} };
+      // If the error was because the requested user was not found
+      // redirect to 404 error page.
+      if (e.response.status === 404) {
+        return error({ statusCode: 404, message: "User not found." });
+      }
+      // Else it was (probably) an internal server error.
+      error({ statusCode: 500, message: "Internal server error" });
     }
   }
 };
