@@ -7,7 +7,10 @@ module.exports = {
     return response;
   },
 
+  // Get a single user by fields from the DB.
   async getUserByFields(fields) {
+    if (Object.keys(fields).length <= 0) throw "No fields sent for DB query.";
+
     const whereStatements = Object.entries(fields)
       .map(([key, val]) => `AND \`${key}\` = "${val}"`)
       .join();
