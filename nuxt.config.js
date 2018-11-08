@@ -1,87 +1,83 @@
+const pkg = require('./package')
+
 module.exports = {
+  mode: 'universal',
+
   /*
   ** Headers of the page
   */
   head: {
-    title: "Swap",
+    title: pkg.name,
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "Nuxt.js project" }
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: pkg.description }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'},
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'}
+    ]
   },
+
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: { color: '#fff' },
+
   /*
   ** Global CSS
   */
-  css: ["@/assets/css/main.css"],
+  css: [
+  ],
+
   /*
-  ** Add axios globally
+  ** Plugins to load before mounting the App
   */
-  build: {
-    vendor: ["axios"],
-    /*
-    ** Run ESLINT on save
-    */
-    extend(config, ctx) {
-      if (ctx.isDev && process.client) {
-        config.module.rules.push({
-          enforce: "pre",
-          test: /\.(js|vue)$/,
-          loader: "eslint-loader",
-          exclude: /(node_modules)/
-        });
-      }
-    }
+  plugins: [
+    '~/plugins/vuetify'
+  ],
+
+  /*
+  ** Nuxt.js modules
+  */
+  modules: [
+    // Doc: https://github.com/nuxt-community/axios-module#usage
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
+  ],
+  /*
+  ** Axios module configuration
+  */
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
   },
-  modules: ["@nuxtjs/axios", "@nuxtjs/auth", "bootstrap-vue/nuxt"],
+
   auth: {
-    token: {
-      prefix: "_token."
-    },
-    localStorage: {
-      prefix: "auth."
-    },
-    // Options
     redirect: {
-      // login: User will be redirected to this path if login is required.
-      login: "/login",
-      // logout: User will be redirected to this path if after logout, current route is protected.
-      logout: "/",
-      // home: User will be redirect to this path after login. (rewriteRedirects will rewrite this path)
-      home: "/profile",
-      // callback: User will be redirect to this path by the identity provider after login.
-      // (Should match configured Allowed Callback URLs (or similar setting) in your app/client
-      // with the identity provider)
-      // callback: "/login",
-      user: "/"
+      logout: '/login'
     },
     strategies: {
       local: {
         endpoints: {
-          login: {
-            url: "/api/auth/login",
-            method: "post",
-            propertyName: "token"
-          },
-          logout: {
-            url: "/api/auth/logout",
-            method: "post"
-          },
-          user: {
-            url: "/api/auth/user",
-            method: "get",
-            propertyName: "user"
-          }
+          // These endpoints must return a json object named as 'propertyName'
+          login: { url: '/api/auth/login', method: 'post', propertyName: 'token' },
+          user: { url: '/api/auth/user', method: 'get', propertyName: 'user' },
+          logout: false
         }
-        // tokenRequired: true,
-        // tokenType: 'bearer',
       }
     }
   },
-  // middleware: ["auth"],
-  serverMiddleware: [
-    // API middleware
-    "~/api/index.js"
-  ]
-};
+
+  /*
+  ** Build configuration
+  */
+  build: {
+    /*
+    ** You can extend webpack config here
+    */
+    extend(config, ctx) {
+      
+    }
+  }
+}
