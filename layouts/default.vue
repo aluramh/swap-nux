@@ -34,7 +34,7 @@
           </v-layout>
         </v-list-tile>
         <v-list-tile>
-          <h3>{{ $auth.user.name }}</h3>
+          <!-- <h3>{{ $auth.user.name }}</h3> -->
         </v-list-tile>
       </v-list>
   </v-navigation-drawer>
