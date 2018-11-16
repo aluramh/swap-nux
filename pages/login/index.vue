@@ -28,7 +28,10 @@ export default {
       this.$auth.loginWith("local", {
         data: { ...userCredentials }
       })
-      .catch(err => this.error = "Please verify your credentials.")
+      .catch(err => {
+        console.error(err)
+        this.error = "Please verify your credentials."
+        })
     }
   }
 };
