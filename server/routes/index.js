@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const passport = require('passport')
+const passport = require("passport");
 
+router.use("/auth", require("./auth"));
+router.use("/users", require("./users"));
 
-router.use('/auth', require('./auth'))
-router.use('/cards', passport.authenticate('jwt', { session: false }), require('./cards'))
+// Protected routes.
+router.use(passport.authenticate("jwt", { session: false }));
+router.use("/cards", require("./cards"));
 
-module.exports = router
+module.exports = router;
